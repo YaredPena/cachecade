@@ -1,4 +1,5 @@
 const express = require('express');
+const model = require('../models/apiKeyModel');
 const router = express.Router();
 
 router.get('/getAllKeys', async (req, res) => {
