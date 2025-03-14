@@ -11,4 +11,6 @@ app.listen(APP_PORT, () => {
     console.log(`engine is running! http://localhost:${APP_PORT}`);
 });
 
+// connect to mongo or establisht he connection with mongoose
+
 app.use('/api', routes);
