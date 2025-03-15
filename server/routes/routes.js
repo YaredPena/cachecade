@@ -1,5 +1,5 @@
 const express = require('express');
-const model = require('../models/apiKeyModel');
+const Model = require('../models/apiKeyModel');
 const router = express.Router();
 
 /* I just wanted to test something
@@ -14,19 +14,30 @@ const testKey = [
 
 router.get('/getAllKeys', async (req, res) => {
     try{
-        const data = await model.find();
+        const data = await Model.find();
         res.json(data);
     } catch(error) {
         res.status(500).send(`Could not GET keys: ${error}`);
     }
 });
 
+
+// great for the dev if I ever wanna find it by id and not by name.
 router.get('/getOneKey/:id', async (req,res) => {
     try{
-        const data = await model.findById(req.params.id);
+        const data = await Model.findById(req.params.id);
         res.json(data)
     } catch(error) {
         res.status(500).send(`Could not GET key: ${error}`);
+    }
+});
+
+router.get('/getKeyByName/:name', async (req, res) => {
+    try{
+        const data = await Model.findOne({ keyName: req.params.name });
+        res.status(200).json(data);
+    } catch(error) {
+        res.status(400).send(`Could not find ${name}`);
     }
 });
 
@@ -34,16 +45,22 @@ router.get('/getOneKey/:id', async (req,res) => {
 router.post('/postKey', async (req,res) => {
     const key = new Model({
         keyName: req.body.keyName,
-        apiKey: req.body.apikey,
+        apiKey: req.body.apiKey,
         description: req.body.description,
         updatedAt: req.body.updatedAt,
         createdAt: req.body.createdAt
     });
 
+    const existingApiKey = await Model.findOne({ apikey: req.body.apikey });
+
+    if(existingApiKey) {
+        return res.status(400).send(`This api key already exists in the system.`);
+    }
+
 
     try{
         const saveKey = await key.save();
-        res.satus(200).json(saveKey)
+        res.status(200).json(saveKey)
     } catch(error) {
         res.status(400).send(`Could not POST key: ${error}`);
     }
