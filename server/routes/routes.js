@@ -22,7 +22,7 @@ router.get('/getAllKeys', async (req, res) => {
 });
 
 
-// great for the dev if I ever wanna find it by id and not by name.
+// great for Me if I ever wanna find it by id and not by name.
 router.get('/getOneKey/:id', async (req,res) => {
     try{
         const data = await Model.findById(req.params.id);
