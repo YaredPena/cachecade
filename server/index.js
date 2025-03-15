@@ -13,7 +13,8 @@ app.listen(APP_PORT, () => {
     console.log(`engine is running! http://localhost:${APP_PORT}`);
 });
 
-//mongoose.connect(process.env.DB_URL);
+mongoose.connect(process.env.DB_URL);
+
 database.on('error', (error) => {
     console.log(`Issue: ${error}`);
 });
