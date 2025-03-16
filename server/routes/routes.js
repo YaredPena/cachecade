@@ -21,8 +21,7 @@ router.get('/getAllKeys', async (req, res) => {
     }
 });
 
-
-// great for Me if I ever wanna find it by id and not by name.
+// great for Me if I ever wanna find it by id and not by name. (ig you say a sanity check..)
 router.get('/getOneKey/:id', async (req,res) => {
     try{
         const data = await Model.findById(req.params.id);
@@ -37,11 +36,13 @@ router.get('/getKeyByName/:name', async (req, res) => {
         const data = await Model.findOne({ keyName: req.params.name });
         res.status(200).json(data);
     } catch(error) {
-        res.status(400).send(`Could not find ${name}`);
+        res.status(400).send(`Could not find ${error}`);
     }
 });
 
-// req.body. ==> as we're making a request (req), we're stitching for example the keyname to a body to be a response for something later.
+// req.body. ==> we're making a request (req), we're stitching for example the keyname to a body to be a response to that req.
+// we get all these params from our schema
+
 router.post('/postKey', async (req,res) => {
     const key = new Model({
         keyName: req.body.keyName,
@@ -56,7 +57,6 @@ router.post('/postKey', async (req,res) => {
     if(existingApiKey) {
         return res.status(400).send(`This api key already exists in the system.`);
     }
-
 
     try{
         const saveKey = await key.save();
@@ -87,7 +87,7 @@ router.patch('/patchKey/:id', async (req, res) => {
 });
 
 // we're find the api key by id here and deleting based off of that. 
-// then we're sending that the {key.title} <-- this is dynamic has been deleted to the console.
+// then we're sending that the {key.title} <-- this is dynamic has been deleted to the client's side.
 router.delete('/deleteKey/:id', async (req, res) => {
     try{
         const id = req.params.id;
@@ -99,3 +99,5 @@ router.delete('/deleteKey/:id', async (req, res) => {
 });
 
 module.exports = router;
+
+//.. endpoints are done all that's left is to build the front end
