@@ -31,8 +31,8 @@ const PostForm = ({ onSuccess }: PostFormProps) => {
       setDescription('');  /// and Description
 
       onSuccess(); 
-    } catch (error: any) {
-      setError(error.response?.data || 'Could not post API key');
+    } catch(error: any) {
+      setError(error.response?.data);
     } finally {
       setLoading(false);
     }

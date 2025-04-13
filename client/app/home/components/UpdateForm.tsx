@@ -20,17 +20,19 @@ const UpdateForm = ({ onSuccess }: UpdateFormProps) => {
     setError(null);
 
     try {
-      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/patchKey/${id}`, {
-        keyName,
-        apiKey,
-        description,
-      });
+        await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/patchKey/${id}`, {
+            keyName,
+            apiKey,
+            description,
+        });
 
-      onSuccess();
-    } catch (error: any) {
-      setError(error.response?.data || 'Could not update API key');
+        onSuccess();
+    } catch(error: any) {
+
+        setError(error.response?.data);
     } finally {
-      setLoading(false);
+
+        setLoading(false);
     }
   };
 

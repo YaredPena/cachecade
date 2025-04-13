@@ -5,6 +5,7 @@ import { fetchData } from '@/lib/apiService'
 import SearchBar from './components/SearchBar';
 import PostForm from './components/PostForm';
 import UpdateForm from './components/UpdateForm';
+import DeleteForm from './components/DeleteForm';
 
 const HomePage = () => {
 /// so you want to clarifiy the types first 
@@ -26,8 +27,6 @@ const [showPostForm, setShowPostForm] = useState(false);
 const [showUpdateForm, setShowUpdateForm] = useState(false);
 const [showDeleteForm, setShowDeleteForm] = useState(false);
 ///const [selectedKey, setSelectedKey] = useState<ApiKeys | null>(null);
-
-
 
     const fetchAllKeys = async () => {
         setLoading(true);
@@ -67,80 +66,6 @@ const [showDeleteForm, setShowDeleteForm] = useState(false);
         }
       
       } 
-
-      /*
-      const fetchPostKey = async () =>{ // this shouldn't need a type 
-        setLoading(true);
-        setError(null);
-
-        try{
-          const postKey = await fetchData(`${process.env.NEXT_PUBLIC_API_URL}/postKey`);
-          setApiKeys(postKey);
-
-        } catch(error) {
-            if(error instanceof Error) {
-              setError({ message: error.message});
-            } else {
-              setError({ message: "could not post api key"});
-            }
-        } finally {
-          setLoading(false);
-        }
-      }
-      */
-
-      /*
-      const fetchUpdateKey = async (id: string) =>{
-        setLoading(true);
-        setError(null);
-
-        /// this is exactly like 
-        
-        if 
-        elif
-        else
-        
-        
-        try{
-          /// assign your variable
-          const updateKey = await fetchData(`${process.env.NEXT_PUBLIC_API_URL}/patchKey/${id}`);
-          setApiKeys(updateKey); // call it through the setter function
-
-          /// error handling our catch <<-- just like node.js
-        } catch(error){
-          if(error instanceof Error){
-            setError({ message: error.message});
-          } else {
-            setError({message: "could not update api key"});
-          }
-
-          /// just set Loading
-        } finally {
-          setLoading(false);
-        }
-      }
-      */
-/*
-      const fetchDeleteKey = async (id: string) =>{
-        setLoading(true);
-        setError(null);
-
-        try{
-          const deleteKey = await fetchData(`${process.env.NEXT_PUBLIC_API_URL}/deleteKey/${id}`);
-          setApiKeys(deleteKey);
-
-        } catch(error){
-          if(error instanceof Error){
-            setError({ message: error.message});
-          } else {
-            setError({message: "could not delete api key"});
-          }
-
-        } finally {
-          setLoading(false);
-        }
-      };
-*/
       
       /// I need a flex box that way api keys can be on the right hand side (our results)
         /// Then search bar + get oneKeyById on top
@@ -204,7 +129,23 @@ const [showDeleteForm, setShowDeleteForm] = useState(false);
                    input id of the key you want to delete
                    then delete that key
                 */}
-        
+
+                <button
+                  onClick={() => setShowDeleteForm((prev) => !prev)}
+                  className="mb-4 bg-amber-50 text-black px-4 py-2 shadow-md border-2 border-amber-500 hover:bg-amber-200"
+                >
+                  {showDeleteForm ? 'Hide Delete Form' : 'Delete API Key'}
+                </button>
+
+                {showDeleteForm && (
+                  <DeleteForm
+                    onSuccess={() => {
+                      fetchAllKeys();
+                      setShowDeleteForm(false);
+                    }}
+                  />
+                )}
+
                 <button
                   className="mt-4 bg-amber-50 text-black px-4 py-2 shadow-md border-2 border-amber-500 hover:bg-amber-200 focus:outline-none hover:text-black transition duration-300"
                   onClick={fetchAllKeys}

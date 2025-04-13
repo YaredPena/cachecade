@@ -25,17 +25,17 @@ const DeleteForm = ({ onSuccess }: DeleteFormProps) => {
     setError(null);
 
         try {
-        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/deleteKey/${id}`);
-        onSuccess();
-        } catch(err: any) {
-        console.error(err);
-        setError(err.response?.data);
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/deleteKey/${id}`);
+            onSuccess();
+
+        } catch (error: any) {
+            setError(error.response?.data);
+
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }
   };
-
 
   return (
     <form
@@ -61,7 +61,7 @@ const DeleteForm = ({ onSuccess }: DeleteFormProps) => {
       <button
         type="submit"
         disabled={loading}
-        className="mt-4 bg-red-100 text-black px-4 py-2 shadow-md border-2 border-red-500 hover:bg-red-200 transition"
+        className="mt-4 bg-amber-50 text-black px-4 py-2 shadow-md border-2 border-amber-500 hover:bg-amber-200 transition"
       >
         Delete
       </button>
