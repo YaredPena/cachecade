@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+// take for every page you've made you NEED to create a prop type for it
 type PostFormProps = {
   onSuccess: () => void;
 };

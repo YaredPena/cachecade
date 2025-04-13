@@ -24,6 +24,7 @@ const [loading, setLoading] = useState(false);
 const [error, setError] = useState<ApiError | null>(null);
 const [showPostForm, setShowPostForm] = useState(false);
 const [showUpdateForm, setShowUpdateForm] = useState(false);
+const [showDeleteForm, setShowDeleteForm] = useState(false);
 ///const [selectedKey, setSelectedKey] = useState<ApiKeys | null>(null);
 
 
@@ -181,7 +182,7 @@ const [showUpdateForm, setShowUpdateForm] = useState(false);
                   />
                 )}
 
-                {/* this should be for the update form */}
+                {/* this is calling the updateform on the UI */}
                 <button 
                   onClick ={() => setShowUpdateForm((prev) => !prev)}
                   className="mb-4 bg-amber-50 text-black px-4 py-2 shadow-md border-2 border-amber-500 hover:bg-amber-200 focus:outline-none hover:text-black transition duration-300"
@@ -197,6 +198,11 @@ const [showUpdateForm, setShowUpdateForm] = useState(false);
                     }}
                   />
                 )}
+
+                {/* now the idea would be to create a delete form 
+                   input id of the key you want to delete
+                   then delete that key
+                */}
         
                 <button
                   className="mt-4 bg-amber-50 text-black px-4 py-2 shadow-md border-2 border-amber-500 hover:bg-amber-200 focus:outline-none hover:text-black transition duration-300"
