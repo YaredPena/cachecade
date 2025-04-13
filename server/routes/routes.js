@@ -31,6 +31,7 @@ router.get('/getOneKey/:id', async (req,res) => {
     }
 });
 
+// doubt I'll need this
 router.get('/getKeyByName/:name', async (req, res) => {
     try{
         const data = await Model.findOne({ keyName: req.params.name });

@@ -128,27 +128,6 @@ const [error, setError] = useState<ApiError | null>(null);
           setLoading(false);
         }
       }
-
-
-      /// haven't decided if I need to build this all the way yet
-      /*
-      const fetchKeyByName = async () => {
-        setLoading(true);
-        setError(null);
-
-        try{
-            const oneKeyName = await fetchData(`${process.env.NEXT_PUBLIC_API_URL}/getOneKey/:name}`);
-            setApiKeys(oneKeyName);
-        } catch (error) {
-            if (error instanceof Error) {
-              setError({ message: error.message });
-            }
-        } finally {
-            setLoading(false);
-        }
-      
-      }
-      */
       
       return (
         /// I need a flex box that way api keys can be on the right hand side (our results)
