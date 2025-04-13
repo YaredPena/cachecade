@@ -93,18 +93,19 @@ const [error, setError] = useState<ApiError | null>(null);
                             mb-6 
                             text-center">
               <button
-                className="bg-amber-50 
-                           text-black 
-                           px-4 
-                           py-2 
-                           shadow-md 
-                           border-2 
-                           border-amber-500 
-                           hover:bg-amber-200 
-                           focus:outline-none 
-                           hover:text-black 
-                           transition 
-                           duration-300"
+                className="
+              bg-amber-50 
+              text-black 
+                px-4 
+                py-2 
+                shadow-md 
+                border-2 
+              border-amber-500 
+              hover:bg-amber-200 
+                focus:outline-none 
+              hover:text-black 
+                transition 
+                duration-300"
                 onClick={fetchAllKeys}
               >
                 Get All Keys
