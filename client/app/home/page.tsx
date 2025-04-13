@@ -60,6 +60,26 @@ const [error, setError] = useState<ApiError | null>(null);
       
       } 
 
+      const fetchPostKey = async () =>{
+        setLoading(true);
+        setError(null);
+
+        try{
+          const postKey = await fetchData(`${process.env.NEXT_PUBLIC_API_URL}/postKey`);
+          setApiKeys(postKey);
+
+        } catch(error) {
+            if(error instanceof Error) {
+              setError({ message: error.message});
+            } else {
+              setError({ message: "could not post api key"});
+            }
+        } finally {
+          setLoading(false);
+        }
+      }
+      
+
       /// haven't decided if I need to build this all the way yet
       /*
       const fetchKeyByName = async () => {
@@ -81,6 +101,18 @@ const [error, setError] = useState<ApiError | null>(null);
       */
       
       return (
+        /// I need a flex box that way api keys can be on the right hand side (our results)
+        /// Then search bar + get oneKeyById on top
+        /// then POST Api key <- maybe I should make this a form???
+        /*  my body: 
+        {"keyName": "",
+         "apiKey": "",
+         "description":}
+        */
+        /// the update key by id: 
+        /// you don't have to update the body all at once 
+        /// then delete key by d
+        /// then GET All keys button
         <div className="min-h-screen flex flex-col items-center justify-start bg-amber-50 py-10">
           <div className="bg-gray-200 shadow-lg rounded-lg p-8 max-w-lg w-full">
             <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
@@ -93,19 +125,7 @@ const [error, setError] = useState<ApiError | null>(null);
                             mb-6 
                             text-center">
               <button
-                className="
-              bg-amber-50 
-              text-black 
-                px-4 
-                py-2 
-                shadow-md 
-                border-2 
-              border-amber-500 
-              hover:bg-amber-200 
-                focus:outline-none 
-              hover:text-black 
-                transition 
-                duration-300"
+                className="bg-amber-50 text-black px-4 py-2 shadow-md border-2 border-amber-500 hover:bg-amber-200 focus:outline-none hover:text-black transition duration-300"
                 onClick={fetchAllKeys}
               >
                 Get All Keys
