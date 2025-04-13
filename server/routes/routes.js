@@ -48,21 +48,22 @@ router.post('/postKey', async (req,res) => {
         keyName: req.body.keyName,
         apiKey: req.body.apiKey,
         description: req.body.description,
-        updatedAt: req.body.updatedAt,
-        createdAt: req.body.createdAt
     });
 
-    const existingApiKey = await Model.findOne({ apikey: req.body.apikey });
+    const existingApiKey = await Model.findOne({ apikey: req.body.apiKey });
 
     if(existingApiKey) {
         return res.status(400).send(`This api key already exists in the system.`);
     }
 
-    try{
-        const saveKey = await key.save();
-        res.status(200).json(saveKey)
-    } catch(error) {
-        res.status(400).send(`Could not POST key: ${error}`);
+    else{
+
+        try{
+            const saveKey = await key.save();
+            res.status(200).json(saveKey)
+        } catch(error) {
+            res.status(400).send(`Could not POST key: ${error}`);
+        }
     }
 });
 
