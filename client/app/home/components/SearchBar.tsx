@@ -7,6 +7,7 @@ type SearchBarProps = {
 
 };
 
+// need to review this 
 const SearchBar = ({ onSearch }: SearchBarProps) => {
   const [input, setInput] = useState('');
 
@@ -17,6 +18,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     setInput('');
   };
 
+  // this is clear 
   return (
     <form onSubmit={handleSubmit} className="mb-6 flex gap-2 justify-center">
       <input

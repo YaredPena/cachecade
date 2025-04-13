@@ -60,7 +60,7 @@ const [error, setError] = useState<ApiError | null>(null);
       
       } 
 
-      const fetchPostKey = async () =>{
+      const fetchPostKey = async () =>{ // this shouldn't need a type 
         setLoading(true);
         setError(null);
 
@@ -78,7 +78,57 @@ const [error, setError] = useState<ApiError | null>(null);
           setLoading(false);
         }
       }
-      
+
+      const fetchUpdateKey = async (id: string) =>{
+        setLoading(true);
+        setError(null);
+
+        /// this is exactly like 
+        /*
+        if 
+        elif
+        else
+        
+        */
+        try{
+          /// assign your variable
+          const updateKey = await fetchData(`${process.env.NEXT_PUBLIC_API_URL}/updateKey/${id}`);
+          setApiKeys(updateKey); // call it through the setter function
+
+          /// error handling our catch <<-- just like node.js
+        } catch(error){
+          if(error instanceof Error){
+            setError({ message: error.message});
+          } else {
+            setError({message: "could not update api key"});
+          }
+
+          /// just set Loading
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      const fetchDeleteKey = async (id: string) =>{
+        setLoading(true);
+        setError(null);
+
+        try{
+          const deleteKey = await fetchData(`${process.env.NEXt_PUBLIC_API_URL}/deleteKey/${id}`);
+          setApiKeys(deleteKey);
+
+        } catch(error){
+          if(error instanceof Error){
+            setError({ message: error.message});
+          } else {
+            setError({message: "could not delete api key"});
+          }
+
+        } finally {
+          setLoading(false);
+        }
+      }
+
 
       /// haven't decided if I need to build this all the way yet
       /*
@@ -111,7 +161,7 @@ const [error, setError] = useState<ApiError | null>(null);
         */
         /// the update key by id: 
         /// you don't have to update the body all at once 
-        /// then delete key by d
+        /// then delete key by id:
         /// then GET All keys button
         <div className="min-h-screen flex flex-col items-center justify-start bg-amber-50 py-10">
           <div className="bg-gray-200 shadow-lg rounded-lg p-8 max-w-lg w-full">
