@@ -60,6 +60,7 @@ const [error, setError] = useState<ApiError | null>(null);
       
       } 
 
+      /*
       const fetchPostKey = async () =>{ // this shouldn't need a type 
         setLoading(true);
         setError(null);
@@ -78,6 +79,7 @@ const [error, setError] = useState<ApiError | null>(null);
           setLoading(false);
         }
       }
+      */
 
       const fetchUpdateKey = async (id: string) =>{
         setLoading(true);
