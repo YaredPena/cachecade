@@ -16,23 +16,26 @@ const DeleteForm = ({ onSuccess }: DeleteFormProps) => {
     e.preventDefault();
 
     if (!id) {
-      setError('Please enter an ID to delete.');
+      setError('An ID is required to delete.');
       return;
     }
-
+    
+    else {
     setLoading(true);
     setError(null);
 
-    try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/deleteKey/${id}`);
-      onSuccess(); // refresh the list or give feedback
-    } catch (err: any) {
-      console.error(err);
-      setError(err.response?.data || 'Could not delete API key');
-    } finally {
-      setLoading(false);
+        try {
+        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/deleteKey/${id}`);
+        onSuccess();
+        } catch(err: any) {
+        console.error(err);
+        setError(err.response?.data);
+        } finally {
+        setLoading(false);
+        }
     }
   };
+
 
   return (
     <form

@@ -120,7 +120,7 @@ const [showDeleteForm, setShowDeleteForm] = useState(false);
         }
       }
       */
-
+/*
       const fetchDeleteKey = async (id: string) =>{
         setLoading(true);
         setError(null);
@@ -139,7 +139,8 @@ const [showDeleteForm, setShowDeleteForm] = useState(false);
         } finally {
           setLoading(false);
         }
-      }
+      };
+*/
       
       /// I need a flex box that way api keys can be on the right hand side (our results)
         /// Then search bar + get oneKeyById on top
