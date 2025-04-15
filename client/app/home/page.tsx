@@ -20,7 +20,8 @@ type ApiKeys = {
     }[];
 
 // then your actual variables
-const [apiKeys, setApiKeys] = useState<ApiKeys | null>(null);
+// important to note: for actual info the user interacts with in our variables and setter we need to refer to our types
+const [apiKeys, setApiKeys] = useState<ApiKeys | null>(null); 
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState<ApiError | null>(null);
 const [showPostForm, setShowPostForm] = useState(false);
@@ -28,6 +29,7 @@ const [showUpdateForm, setShowUpdateForm] = useState(false);
 const [showDeleteForm, setShowDeleteForm] = useState(false);
 ///const [selectedKey, setSelectedKey] = useState<ApiKeys | null>(null);
 
+// Interactability, this mostly goes back to basic CRUDING and understanding endpoints
     const fetchAllKeys = async () => {
         setLoading(true);
         setError(null);   
